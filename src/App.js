@@ -8,13 +8,19 @@ class Todo extends Component {
     draft: ''
   }
 
+  isEmpty = str => {
+    return (!str || 0 === str.length);    
+  }
+
   updateDraft = event => {
     this.setState({draft: event.target.value})
   }
 
   addTask = () => {
-    myTasks.push(this.state.draft);
-    this.setState({tasks: this.props.tasks, draft: ''});
+    if(!this.isEmpty(this.state.draft)) {
+      myTasks.push(this.state.draft);
+      this.setState({tasks: this.props.tasks, draft: ''})
+    }
   }
 
   render() {
@@ -23,9 +29,9 @@ class Todo extends Component {
     return (
       <div>
         <h1>{title}</h1>
-        {tasks.map(task => <ol><ul>{task}</ul></ol>)}
+        <ol>{tasks.map(task =><li>{task}</li>)}</ol>
         <input type="text" value={draft} onChange={this.updateDraft}></input>
-        <button onClick={this.addTask}>Add</button>
+        <button onClick={this.addTask}>Dodaj</button>
       </div>
     )
   }
@@ -34,7 +40,7 @@ class Todo extends Component {
 function App() {
   return (
     <div className="App">
-      <Todo title="To do List" tasks={myTasks}/>
+      <Todo title="Lista zakupów" tasks={myTasks}/>
     </div>
   );
 }
