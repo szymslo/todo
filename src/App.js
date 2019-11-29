@@ -9,7 +9,7 @@ class Todo extends Component {
   }
 
   isEmpty = str => {
-    return (!str || 0 === str.length);    
+    return (!str || 0 === str.length || /^\s*$/.test(str));
   }
 
   updateDraft = event => {
@@ -17,10 +17,11 @@ class Todo extends Component {
   }
 
   addTask = () => {
-    if(!this.isEmpty(this.state.draft)) {
-      myTasks.push(this.state.draft);
-      this.setState({tasks: this.props.tasks, draft: ''})
+    const {draft} = this.state;
+    if(!this.isEmpty(draft)) {
+      myTasks.push(draft);
     }
+    this.setState({tasks: this.props.tasks, draft: ''})
   }
 
   render() {
