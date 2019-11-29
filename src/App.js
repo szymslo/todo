@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+
+let myTasks = [];
+
+class Todo extends Component {
+  state = {
+    tasks: this.props.tasks,
+    draft: ''
+  }
+
+  updateDraft = event => {
+    this.setState({draft: event.target.value})
+  }
+
+  addTask = () => {
+    myTasks.push(this.state.draft);
+    this.setState({tasks: this.props.tasks, draft: ''});
+  }
+
+  render() {
+    const {title} = this.props;
+    const {tasks, draft} = this.state;
+    return (
+      <div>
+        <h1>{title}</h1>
+        {tasks.map(task => <ol><ul>{task}</ul></ol>)}
+        <input type="text" value={draft} onChange={this.updateDraft}></input>
+        <button onClick={this.addTask}>Add</button>
+      </div>
+    )
+  }
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Todo title="To do List" tasks={myTasks}/>
     </div>
   );
 }
