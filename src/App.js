@@ -4,9 +4,12 @@ import './App.css';
 let myTasks = [];
 
 class Todo extends Component {
-  state = {
-    tasks: this.props.tasks,
-    draft: ''
+  constructor(props) {
+    super(props);
+    this.state = {
+      tasks: this.props.tasks,
+      draft: ''
+    };
   }
 
   isEmpty = str => {
