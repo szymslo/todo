@@ -3,8 +3,8 @@ import TodoElement from './TodoElement';
 import './TodoList.css';
 
 class TodoList extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       tasks: [],
       draft: ''
