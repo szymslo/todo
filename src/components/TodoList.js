@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import TodoElement from './TodoElement';
 import './TodoList.css';
 
 class TodoList extends Component {
@@ -34,7 +35,7 @@ class TodoList extends Component {
     return (
       <div>
         <h1>{title}</h1>
-        <ol>{tasks.map(task =><li>{task}</li>)}</ol>
+        <ol>{tasks.map(task => <TodoElement task={task}/>)}</ol>
         <input type="text" value={draft} onChange={this.updateDraft}></input>
         <button onClick={this.addTask}>Dodaj</button>
       </div>
