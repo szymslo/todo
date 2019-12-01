@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
-import './App.css';
+import './TodoList.css';
 
-let myTasks = [];
-
-class Todo extends Component {
+class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: this.props.tasks,
+      tasks: [],
       draft: ''
     };
   }
@@ -17,15 +15,17 @@ class Todo extends Component {
   }
 
   updateDraft = event => {
-    this.setState({draft: event.target.value})
+    this.setState({draft: event.target.value});
   }
 
   addTask = () => {
-    const {draft} = this.state;
-    if(!this.isEmpty(draft)) {
-      myTasks.push(draft);
+    const {draft,tasks} = this.state;
+      if(!this.isEmpty(draft)) {
+        this.setState({
+          tasks: [...tasks, draft], // rest operator - zbiera on do tablicy o podanej nazwie wszystkie pozostałe przekazane do funkcji argumenty, które nie zostały wymienione przed nim
+          draft: ''
+      });
     }
-    this.setState({tasks: this.props.tasks, draft: ''})
   }
 
   render() {
@@ -38,16 +38,8 @@ class Todo extends Component {
         <input type="text" value={draft} onChange={this.updateDraft}></input>
         <button onClick={this.addTask}>Dodaj</button>
       </div>
-    )
+    );
   }
 }
 
-function App() {
-  return (
-    <div className="App">
-      <Todo title="Lista zakupów" tasks={myTasks}/>
-    </div>
-  );
-}
-
-export default App;
+export default TodoList;
