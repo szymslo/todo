@@ -12,11 +12,12 @@ class TodoElement extends Component {
     toggleDone = () => {
         this.setState({isDone: !this.state.isDone})
     }
-
+    
     render() {
         return (
-        <div onClick={this.toggleDone} className={this.state.isDone ? 'doneTodo' : ''}> 
-            <li>{this.props.task}</li>
+        <div>
+            <div className='listEl'><li onClick={this.toggleDone} className={this.state.isDone ? 'elDone' : ''}>{this.props.task}</li></div>
+            <div className='listEl'><button className='delete'>Usuń</button></div>       
         </div>
         );
     }

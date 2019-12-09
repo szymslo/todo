@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import TodoElement from './TodoElement';
+import TodoElement from '../element/TodoElement'
 import './TodoList.css';
 
 class TodoList extends Component {
@@ -23,7 +23,7 @@ class TodoList extends Component {
     const {draft,tasks} = this.state;
       if(!this.isEmpty(draft)) {
         this.setState({
-          tasks: [...tasks, draft], // rest operator - zbiera on do tablicy o podanej nazwie wszystkie pozostałe przekazane do funkcji argumenty, które nie zostały wymienione przed nim
+          tasks: [...tasks,draft], // rest operator - zbiera on do tablicy o podanej nazwie wszystkie pozostałe przekazane do funkcji argumenty, które nie zostały wymienione przed nim
           draft: ''
       });
     }
@@ -33,12 +33,12 @@ class TodoList extends Component {
     const {title} = this.props;
     const {tasks, draft} = this.state;
     return (
-      <div>
+      <>
         <h1>{title}</h1>
-        <ol>{tasks.map(task => <TodoElement task={task}/>)}</ol>
+        <ol>{tasks.map(task => <TodoElement task={task.text}/>)}</ol>
         <input type="text" value={draft} onChange={this.updateDraft}></input>
         <button onClick={this.addTask}>Dodaj</button>
-      </div>
+      </>
     );
   }
 }
