@@ -34,7 +34,7 @@ class ToDoList extends Component {
   render() {
     const {tasks, draft} = this.state;
     return (
-      <>
+      <div>
         <h1>{this.title}</h1>
         <ol>{tasks.map(task => <ToDoElement task={task}/>)}</ol>
         <ToDoInput 
@@ -42,7 +42,7 @@ class ToDoList extends Component {
           onChange = {this.updateDraft}
           draft = {draft}
         />
-      </>
+      </div>
     );
   }
 }

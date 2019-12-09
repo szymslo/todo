@@ -2,13 +2,11 @@ import React from 'react';
 import './style.css';
 
 //komponent funkcyjny
-const ToDoInput = (props) => {
-    return (
+const ToDoInput = ({onChange, onSubmit, draft}) => (
         <>
-            <input type='text' onChange={props.onChange} draft={props.value} />
-            <button onClick={props.onSubmit}>Dodaj</button>
+            <input type='text' onChange={onChange} value={draft}/>
+            <button onClick={onSubmit}>Dodaj</button>
         </>
-    );
-}
+)
 
 export default ToDoInput;

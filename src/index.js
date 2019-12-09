@@ -6,7 +6,7 @@ import './index.css';
 
 function App() {
     return (
-      <div className="TodoList">
+      <div className="ToDoList">
         <TodoList/>
       </div>
     );

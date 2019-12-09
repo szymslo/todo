@@ -1,4 +1,7 @@
-.TodoList {
+.ToDoList {
   text-align: center;
-  margin: 0 auto;
+  background-color:dimgray;
+  border-radius: 5px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
 }
