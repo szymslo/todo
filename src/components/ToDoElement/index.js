@@ -1,12 +1,10 @@
 import React, {Component} from 'react';  
 import styled from 'styled-components';
 
-const ListContainer = styled.div`
-    display: inline-block;
-`
+
 const Button = styled.button`
-    background: tomato;
-    border: 2px solid tomato;
+    background: rgb(235, 64, 52);
+    border: 2px solid rgb(235, 64, 52);
     border-radius: 3px;
     color: white;
     font-size:.5em;
@@ -15,7 +13,20 @@ const Button = styled.button`
     height: 2em;
     margin: 0.5em 1em;
     padding: 0.1em 0.1em;
+    &:hover {
+        background: rgb(191, 57, 48);
+        border: 2px solid rgb(191, 57, 48);
+    }
 `
+
+const ListElement = styled.li`
+    text-decoration: ${props => props.done ? 'line-through' : 'none'};
+`
+
+const ListContainer = styled.div`
+    display:inline-block;
+`
+
 
 class ToDoElement extends Component {
     constructor() {
@@ -32,9 +43,10 @@ class ToDoElement extends Component {
     render() {
         return (
         <div>
-            <ListContainer><li onClick={this.toggleDone} className={this.state.isDone ? 'elDone' : ''}>{this.props.task}</li></ListContainer>
-            <ListContainer><Button className='delete'>-</Button></ListContainer>      
-        </div>
+            <ListContainer><ListElement onClick={this.toggleDone} done={this.state.isDone}>{this.props.task}</ListElement></ListContainer>
+            <ListContainer><Button className='delete'>-</Button></ListContainer>
+        </div>     
+
         );
     }
 }

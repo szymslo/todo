@@ -7,6 +7,7 @@ const ListContainer = styled.div`
   text-align: center;
   margin: 0 auto;
   margin-top: 3em;
+  margin-bottom: 3em;
   padding:1em 1em;
   width: 80%;
   max-width: 600px;
@@ -14,6 +15,7 @@ const ListContainer = styled.div`
   border: 1px solid black;
   border-radius: 3px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, .5);
+  word-break:break-all;
 `
 
 class ToDoList extends Component {
