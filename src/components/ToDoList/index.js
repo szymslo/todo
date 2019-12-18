@@ -24,6 +24,7 @@ class ToDoList extends Component {
     this.title = 'Lista zakupów';
     this.state = {
       tasks: [],
+      item: {text:'', key:''},
       draft: ''
     };
   }
@@ -33,15 +34,24 @@ class ToDoList extends Component {
   }
 
   updateDraft = event => {
-    this.setState({draft: event.target.value});
+    this.setState({
+      draft: event.target.value,
+      item: {text:event.target.value, key: Date.now()}
+    });
   }
 
+  // updateCurrentItem = () => {
+  //   this.setState({
+  //     item: {text:this.state.draft, key: Date.now()},
+  //   });
+  // }
+
   addTask = () => {
-    const {draft,tasks} = this.state;
-      if(!this.isEmpty(draft)) {
-        this.setState({
-          tasks: [...tasks, draft], // rest operator - zbiera on do tablicy o podanej nazwie wszystkie pozostałe przekazane do funkcji argumenty, które nie zostały wymienione przed nim
-          draft: ''
+    const {draft,item,tasks} = this.state;    
+    if(!this.isEmpty(draft)) {
+      this.setState({
+        tasks:[...tasks, item],
+        draft:''
       });
     }
   }
@@ -51,9 +61,10 @@ class ToDoList extends Component {
     return (
       <ListContainer>
         <h1>{this.title}</h1>
-        <ol>{tasks.map(task => <ToDoElement task={task}/>)}</ol>
+        <ol>{tasks.map(task => <ToDoElement task={task.text}/>)}</ol>
         <ToDoInput 
-          onSubmit = {this.addTask} 
+          // onSubmit = {() => { this.updateCurrentItem(); this.addTask() } }
+          onSubmit={this.addTask}
           onChange = {this.updateDraft}
           draft = {draft}
         />

@@ -18,7 +18,7 @@ const Button = styled.button`
 `
 const Input = styled.input`
     background: transparent;
-    border: 2px solid gray;
+    border: 1px solid black;
     border-radius: 3px;
     font-size:.9em;
     width: 15em;
