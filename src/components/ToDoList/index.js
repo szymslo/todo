@@ -18,13 +18,19 @@ const ListContainer = styled.div`
   word-break:break-all;
 `
 
+class Item {
+  constructor(text, key) {
+    this.text = text;
+    this.key = key;
+  };
+}
+
 class ToDoList extends Component {
   constructor() {
     super();
     this.title = 'Lista zakupów';
     this.state = {
       tasks: [],
-      item: {text:'', key:''},
       draft: ''
     };
   }
@@ -36,24 +42,26 @@ class ToDoList extends Component {
   updateDraft = event => {
     this.setState({
       draft: event.target.value,
-      item: {text:event.target.value, key: Date.now()}
     });
   }
 
-  // updateCurrentItem = () => {
-  //   this.setState({
-  //     item: {text:this.state.draft, key: Date.now()},
-  //   });
-  // }
-
   addTask = () => {
-    const {draft,item,tasks} = this.state;    
+    const {draft,tasks} = this.state;    
     if(!this.isEmpty(draft)) {
+      const newItem = new Item(this.state.draft, Date.now());
       this.setState({
-        tasks:[...tasks, item],
+        tasks:[...tasks, newItem], //rest parameter
         draft:''
       });
     }
+  }
+
+  delete = id => {
+    const ntasks = this.state.tasks.filter(task => task.key !== id)
+    this.setState({
+      tasks: ntasks
+    });
+    console.log('delete triggered');
   }
 
   render() {
@@ -61,9 +69,8 @@ class ToDoList extends Component {
     return (
       <ListContainer>
         <h1>{this.title}</h1>
-        <ol>{tasks.map(task => <ToDoElement task={task.text}/>)}</ol>
+        <ol>{tasks.map(task => <ToDoElement task={task} _handleDelete={this.delete}/>)}</ol>
         <ToDoInput 
-          // onSubmit = {() => { this.updateCurrentItem(); this.addTask() } }
           onSubmit={this.addTask}
           onChange = {this.updateDraft}
           draft = {draft}

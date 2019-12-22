@@ -39,14 +39,17 @@ class ToDoElement extends Component {
     toggleDone = () => {
         this.setState({isDone: !this.state.isDone})
     }
+
+    handleDelete = id => {
+        this.props._handleDelete(id);
+    }
     
     render() {
         return (
         <div>
-            <ListContainer><ListElement onClick={this.toggleDone} done={this.state.isDone}>{this.props.task}</ListElement></ListContainer>
-            <ListContainer><Button className='delete'>-</Button></ListContainer>
+            <ListContainer><ListElement onClick={this.toggleDone} done={this.state.isDone} >{this.props.task.text}</ListElement></ListContainer>
+            <ListContainer><Button onClick={this.handleDelete.bind(this, this.props.task.key)}>-</Button></ListContainer>
         </div>     
-
         );
     }
 }
